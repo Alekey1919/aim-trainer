@@ -46,3 +46,35 @@ export interface ISurvivalGameState {
   timeElapsed: number;
   targets: ITargetData[];
 }
+
+// Flick game distance options
+export type FlickDistance = "close" | "medium" | "far";
+
+export const FLICK_DISTANCES: Record<FlickDistance, number> = {
+  close: 20,
+  medium: 40,
+  far: 60,
+};
+
+// Flick game settings
+export interface IFlickSettings {
+  targetSize: TargetSize;
+  distance: FlickDistance;
+  rounds: number;
+}
+
+// Flick round result
+export interface IFlickRoundResult {
+  round: number;
+  reactionTime: number; // ms between clicks
+  hit: boolean;
+}
+
+// Flick target data (simpler than survival)
+export interface IFlickTargetData {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  isActive: boolean; // the one to click
+}

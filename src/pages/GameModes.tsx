@@ -3,7 +3,7 @@ import RoutesEnum from "../enums/RoutesEnum";
 
 const gameModes = [
   { name: "Survival", img: "", url: RoutesEnum.Survival },
-  { name: "Flick", img: "", url: undefined },
+  { name: "Flick", img: "", url: RoutesEnum.Flick },
   { name: "Tracking", img: "", url: undefined },
   { name: "Click speed", img: "", url: undefined },
   { name: "Reaction time", img: "", url: undefined },

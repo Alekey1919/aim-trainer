@@ -2,6 +2,46 @@
 
 @theme {
   --color-mint: #55cdb5;
-  --color-dark-blue: #1C1E28
+  --color-dark-blue: #1c1e28;
+  --color-light-blue: #aad2f9;
+  --color-cream: #fcddbc;
   --font-sans: "Hedvig Letters Sans", sans-serif;
+}
+
+html {
+  background-color: var(--color-dark-blue);
+}
+
+h1 {
+  @apply text-5xl font-bold;
+}
+
+h2 {
+  @apply text-3xl font-semibold mb-3;
+}
+
+.layout-padding {
+  @apply p-6 md:p-10 lg:p-12 xl:p-16 2xl:p-24;
+}
+
+/* Target animation - grows then shrinks */
+@keyframes targetGrowShrink {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }

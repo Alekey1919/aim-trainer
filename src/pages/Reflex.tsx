@@ -153,7 +153,7 @@ const Reflex = () => {
 
       {/* Playing Phase */}
       {phase === GamePhase.Playing && (
-        <>
+        <div className="w-full m-auto max-w-[1500px] relative">
           <ReflexHUD
             round={currentRound + 1}
             lastReactionTime={lastReactionTime}
@@ -176,7 +176,7 @@ const Reflex = () => {
               </div>
             )}
           </GameArea>
-        </>
+        </div>
       )}
 
       {/* Game Over Phase */}

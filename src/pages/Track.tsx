@@ -213,7 +213,7 @@ const Track = () => {
 
       {/* Playing Phase */}
       {phase === GamePhase.Playing && (
-        <>
+        <div className="w-full m-auto max-w-[1500px] relative">
           <TrackHUD
             score={score}
             timeRemaining={timeRemaining}
@@ -229,7 +229,7 @@ const Track = () => {
               />
             </GameArea>
           </div>
-        </>
+        </div>
       )}
 
       {/* Game Over Phase */}

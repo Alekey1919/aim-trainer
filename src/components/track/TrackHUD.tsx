@@ -12,7 +12,7 @@ const formatTime = (seconds: number): string => {
 
 const TrackHUD = ({ score, timeRemaining, trackingPercent }: TrackHUDProps) => {
   return (
-    <div className="flex justify-between items-center mb-4 px-2">
+    <div className="survival-HUD">
       {/* Score */}
       <div className="text-cream text-2xl font-semibold">
         <span className="text-cream/60 text-lg">Score: </span>

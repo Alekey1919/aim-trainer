@@ -159,7 +159,7 @@ const Survival = () => {
 
       {/* Playing Phase */}
       {phase === GamePhase.Playing && (
-        <>
+        <div className="w-full m-auto max-w-[1500px] relative">
           <GameHUD
             score={score}
             timeElapsed={timeElapsed}
@@ -176,7 +176,7 @@ const Survival = () => {
               />
             ))}
           </GameArea>
-        </>
+        </div>
       )}
 
       {/* Game Over Phase */}

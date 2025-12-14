@@ -210,7 +210,7 @@ const Flick = () => {
 
       {/* Playing Phase */}
       {phase === GamePhase.Playing && targets && (
-        <>
+        <div className="w-full m-auto max-w-[1500px] relative">
           <FlickHUD
             currentRound={currentRound}
             totalRounds={settings.rounds}
@@ -235,7 +235,7 @@ const Flick = () => {
               onClick={() => handleTargetClick(1)}
             />
           </GameArea>
-        </>
+        </div>
       )}
 
       {/* Game Over Phase */}

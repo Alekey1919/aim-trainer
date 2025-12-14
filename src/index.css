@@ -49,3 +49,7 @@ h2 {
 button {
   @apply cursor-pointer;
 }
+
+.survival-HUD {
+  @apply flex justify-between items-center mb-4 px-2 absolute top-0 left-0 w-full -translate-y-[150%];
+}

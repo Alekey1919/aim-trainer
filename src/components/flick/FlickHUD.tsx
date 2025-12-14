@@ -16,7 +16,7 @@ const FlickHUD = ({
   misses,
 }: FlickHUDProps) => {
   return (
-    <div className="flex justify-between items-center mb-4 px-2">
+    <div className="survival-HUD">
       {/* Round counter */}
       <div className="text-cream text-xl">
         <span className="text-cream/60">Round </span>

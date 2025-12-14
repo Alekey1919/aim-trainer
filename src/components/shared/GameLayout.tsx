@@ -14,7 +14,11 @@ const GameLayout = ({
     <div className="layout-padding min-h-screen flex flex-col">
       <div className="items-center justify-between grid grid-cols-3">
         <button onClick={goToGames}>
-          <img src={Cross} alt="Go back" className="w-14" />
+          <img
+            src={Cross}
+            alt="Go back"
+            className="w-14 hover:scale-105 transition-transform"
+          />
         </button>
         <h1 className="text-mint text-center">{title}</h1>
       </div>

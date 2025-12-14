@@ -11,7 +11,7 @@ const GameArea = ({ children, onClick, className }: GameAreaProps) => {
   return (
     <div
       className={twMerge(
-        "relative w-full h-125 bg-dark-blue/50 border-2 border-light-blue/30 rounded-lg overflow-hidden m-auto max-w-[1500px]",
+        "relative w-full h-125 bg-dark-blue/50 border-2 border-light-blue/30 rounded-lg overflow-hidden m-auto",
         className
       )}
       onClick={onClick}

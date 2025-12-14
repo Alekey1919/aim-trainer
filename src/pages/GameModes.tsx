@@ -1,4 +1,4 @@
-import GameThumbnail from "../components/GameThumbnail";
+import GameThumbnail from "../components/shared/GameThumbnail";
 import RoutesEnum from "../enums/RoutesEnum";
 
 const gameModes = [

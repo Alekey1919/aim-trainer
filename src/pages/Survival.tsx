@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GameArea from "../components/GameArea";
-import GameHUD from "../components/GameHUD";
-import GameOver from "../components/GameOver";
-import SurvivalSettings from "../components/SurvivalSettings";
-import Target from "../components/SurvivalTarget";
+import GameArea from "../components/shared/GameArea";
+import GameHUD from "../components/survival/GameHUD";
+import GameOver from "../components/survival/GameOver";
+import SurvivalSettings from "../components/survival/SurvivalSettings";
+import Target from "../components/survival/SurvivalTarget";
 import RoutesEnum from "../enums/RoutesEnum";
 import {
   GamePhase,

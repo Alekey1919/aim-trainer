@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GameArea from "../components/GameArea";
-import TrackGameOver from "../components/TrackGameOver";
-import TrackHUD from "../components/TrackHUD";
-import TrackSettings from "../components/TrackSettings";
-import TrackTarget from "../components/TrackTarget";
+import GameArea from "../components/shared/GameArea";
+import TrackGameOver from "../components/track/TrackGameOver";
+import TrackHUD from "../components/track/TrackHUD";
+import TrackSettings from "../components/track/TrackSettings";
+import TrackTarget from "../components/track/TrackTarget";
 import RoutesEnum from "../enums/RoutesEnum";
 import {
   GamePhase,

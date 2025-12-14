@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GameArea from "../components/GameArea";
-import ReflexGameOver from "../components/ReflexGameOver";
-import ReflexHUD from "../components/ReflexHUD";
-import ReflexSettings from "../components/ReflexSettings";
-import ReflexTarget from "../components/ReflexTarget";
+import GameArea from "../components/shared/GameArea";
+import ReflexGameOver from "../components/reflex/ReflexGameOver";
+import ReflexHUD from "../components/reflex/ReflexHUD";
+import ReflexSettings from "../components/reflex/ReflexSettings";
+import ReflexTarget from "../components/reflex/ReflexTarget";
 import RoutesEnum from "../enums/RoutesEnum";
 import {
   GamePhase,

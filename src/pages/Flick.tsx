@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FlickGameOver from "../components/FlickGameOver";
-import FlickHUD from "../components/FlickHUD";
-import FlickSettings from "../components/FlickSettings";
-import FlickTarget from "../components/FlickTarget";
-import GameArea from "../components/GameArea";
+import FlickGameOver from "../components/flick/FlickGameOver";
+import FlickHUD from "../components/flick/FlickHUD";
+import FlickSettings from "../components/flick/FlickSettings";
+import FlickTarget from "../components/flick/FlickTarget";
+import GameArea from "../components/shared/GameArea";
 import RoutesEnum from "../enums/RoutesEnum";
 import {
   FLICK_DISTANCES,

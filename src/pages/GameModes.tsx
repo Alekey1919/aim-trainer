@@ -1,12 +1,17 @@
+import FlickImg from "../assets/flick.webp";
+import ReactionTimeImg from "../assets/reaction-time.webp";
+import ReflexImg from "../assets/reflex.webp";
+import SurvivalImg from "../assets/survival.webp";
+import TrackingImg from "../assets/tracking.webp";
 import GameThumbnail from "../components/shared/GameThumbnail";
 import RoutesEnum from "../enums/RoutesEnum";
 
 const gameModes = [
-  { name: "Survival", img: "", url: RoutesEnum.Survival },
-  { name: "Flick", img: "", url: RoutesEnum.Flick },
-  { name: "Tracking", img: "", url: RoutesEnum.Track },
-  { name: "Reflex", img: "", url: RoutesEnum.Reflex },
-  { name: "Reaction Time", img: "", url: RoutesEnum.ReactionTime },
+  { name: "Survival", img: SurvivalImg, url: RoutesEnum.Survival },
+  { name: "Flick", img: FlickImg, url: RoutesEnum.Flick },
+  { name: "Tracking", img: TrackingImg, url: RoutesEnum.Track },
+  { name: "Reflex", img: ReflexImg, url: RoutesEnum.Reflex },
+  { name: "Reaction Time", img: ReactionTimeImg, url: RoutesEnum.ReactionTime },
 ];
 
 const GameModes = () => {

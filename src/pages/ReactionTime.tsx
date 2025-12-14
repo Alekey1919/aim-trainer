@@ -21,7 +21,7 @@ const ReactionTime = () => {
 
   // Game state
   const [phase, setPhase] = useState<ReactionTimePhase>(
-    ReactionTimePhase.Settings
+    ReactionTimePhase.Ready
   );
   const [currentRound, setCurrentRound] = useState(1);
   const [results, setResults] = useState<IReactionTimeResult[]>([]);
@@ -130,8 +130,7 @@ const ReactionTime = () => {
       case ReactionTimePhase.Waiting:
         return (
           <div className="text-center">
-            <p className="text-4xl font-bold text-cream mb-2">Wait...</p>
-            <p className="text-cream/60">Click when the screen turns green</p>
+            <p className="text-6xl font-bold text-cream">WAIT...</p>
           </div>
         );
       case ReactionTimePhase.Ready:

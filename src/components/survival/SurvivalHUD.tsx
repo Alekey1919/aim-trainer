@@ -1,3 +1,6 @@
+import EmptyHeart from "../../assets/empty-heart.svg";
+import Heart from "../../assets/heart.svg";
+
 interface GameHUDProps {
   score: number;
   timeElapsed: number;
@@ -25,14 +28,11 @@ const GameHUD = ({ score, timeElapsed, lives, maxLives }: GameHUDProps) => {
       {/* Lives */}
       <div className="flex gap-1">
         {Array.from({ length: maxLives }).map((_, index) => (
-          <span
-            key={index}
-            className={`text-xl ${
-              index < lives ? "text-mint" : "text-mint/30"
-            }`}
-          >
-            ♥
-          </span>
+          <img
+            src={index < lives ? Heart : EmptyHeart}
+            alt="Life"
+            className="w-6"
+          />
         ))}
       </div>
     </div>

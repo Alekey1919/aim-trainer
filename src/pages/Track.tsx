@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import GameArea from "../components/shared/GameArea";
+import GameLayout from "../components/shared/GameLayout";
 import TrackGameOver from "../components/track/TrackGameOver";
 import TrackHUD from "../components/track/TrackHUD";
 import TrackSettings from "../components/track/TrackSettings";
 import TrackTarget from "../components/track/TrackTarget";
-import RoutesEnum from "../enums/RoutesEnum";
 import {
   GamePhase,
   TARGET_SIZES,
@@ -19,8 +18,6 @@ const TICK_RATE = 16; // ~60fps
 const DIRECTION_CHANGE_INTERVAL = 500;
 
 const Track = () => {
-  const navigate = useNavigate();
-
   // Game settings
   const [settings, setSettings] = useState<ITrackSettings>({
     targetSize: "medium",
@@ -134,11 +131,6 @@ const Track = () => {
     startGame();
   }, [startGame]);
 
-  // Handle go back
-  const handleGoBack = useCallback(() => {
-    navigate(RoutesEnum.GameModes);
-  }, [navigate]);
-
   // Set up game loop when playing
   useEffect(() => {
     if (phase === GamePhase.Playing) {
@@ -206,26 +198,8 @@ const Track = () => {
   const trackingPercent =
     totalTicks > 0 ? (hoveringTicks / totalTicks) * 100 : 0;
 
-  // Render phase label
-  const getPhaseLabel = () => {
-    switch (phase) {
-      case GamePhase.Settings:
-        return "Game starting";
-      case GamePhase.Playing:
-        return "Gameplay";
-      case GamePhase.GameOver:
-        return "Results";
-    }
-  };
-
   return (
-    <div className="layout-padding min-h-screen flex flex-col">
-      {/* Phase indicator */}
-      <div className="text-cream/50 text-sm mb-4">{getPhaseLabel()}</div>
-
-      {/* Title */}
-      <h1 className="text-mint text-center mb-10">Track the target</h1>
-
+    <GameLayout title="Track the target">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
         <GameArea className="flex items-center justify-center">
@@ -266,11 +240,10 @@ const Track = () => {
             trackingPercent={trackingPercent}
             gameTime={settings.gameTime}
             onPlayAgain={handlePlayAgain}
-            onGoBack={handleGoBack}
           />
         </GameArea>
       )}
-    </div>
+    </GameLayout>
   );
 };
 

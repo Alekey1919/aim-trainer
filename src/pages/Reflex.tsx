@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import GameArea from "../components/shared/GameArea";
 import ReflexGameOver from "../components/reflex/ReflexGameOver";
 import ReflexHUD from "../components/reflex/ReflexHUD";
 import ReflexSettings from "../components/reflex/ReflexSettings";
 import ReflexTarget from "../components/reflex/ReflexTarget";
-import RoutesEnum from "../enums/RoutesEnum";
+import GameArea from "../components/shared/GameArea";
+import GameLayout from "../components/shared/GameLayout";
 import {
   GamePhase,
   TARGET_SIZES,
@@ -18,8 +17,6 @@ const MIN_SPAWN_DELAY = 1000;
 const MAX_SPAWN_DELAY = 3000;
 
 const Reflex = () => {
-  const navigate = useNavigate();
-
   // Game settings
   const [settings, setSettings] = useState<IReflexSettings>({
     targetSize: "medium",
@@ -115,11 +112,6 @@ const Reflex = () => {
     startGame();
   }, [startGame]);
 
-  // Handle go back
-  const handleGoBack = useCallback(() => {
-    navigate(RoutesEnum.GameModes);
-  }, [navigate]);
-
   // Clean up timeout on unmount or game over
   useEffect(() => {
     return () => {
@@ -146,26 +138,8 @@ const Reflex = () => {
       ? results.reduce((acc, r) => acc + r.reactionTime, 0) / results.length
       : null;
 
-  // Render phase label
-  const getPhaseLabel = () => {
-    switch (phase) {
-      case GamePhase.Settings:
-        return "Game starting";
-      case GamePhase.Playing:
-        return "Gameplay";
-      case GamePhase.GameOver:
-        return "Game Over";
-    }
-  };
-
   return (
-    <div className="layout-padding min-h-screen flex flex-col">
-      {/* Phase indicator */}
-      <div className="text-cream/50 text-sm mb-4">{getPhaseLabel()}</div>
-
-      {/* Title */}
-      <h1 className="text-mint text-center mb-10">Test your reflexes</h1>
-
+    <GameLayout title="Test your reflexes">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
         <GameArea className="flex items-center justify-center">
@@ -208,14 +182,10 @@ const Reflex = () => {
       {/* Game Over Phase */}
       {phase === GamePhase.GameOver && (
         <GameArea className="flex items-center justify-center">
-          <ReflexGameOver
-            results={results}
-            onPlayAgain={handlePlayAgain}
-            onGoBack={handleGoBack}
-          />
+          <ReflexGameOver results={results} onPlayAgain={handlePlayAgain} />
         </GameArea>
       )}
-    </div>
+    </GameLayout>
   );
 };
 

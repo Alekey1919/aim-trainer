@@ -1,16 +1,13 @@
+import useRedirections from "../../hooks/useRedirections";
 import type { IReflexRoundResult } from "../../types/TargetTypes";
 
 interface ReflexGameOverProps {
   results: IReflexRoundResult[];
   onPlayAgain: () => void;
-  onGoBack: () => void;
 }
 
-const ReflexGameOver = ({
-  results,
-  onPlayAgain,
-  onGoBack,
-}: ReflexGameOverProps) => {
+const ReflexGameOver = ({ results, onPlayAgain }: ReflexGameOverProps) => {
+  const { goToGames } = useRedirections();
   const rounds = results.length;
 
   const averageTime =
@@ -54,7 +51,7 @@ const ReflexGameOver = ({
           Play Again
         </button>
         <button
-          onClick={onGoBack}
+          onClick={goToGames}
           className="px-8 py-3 border-2 border-mint text-mint font-bold text-lg rounded-lg hover:bg-mint/10 transition-colors"
         >
           Back to Menu

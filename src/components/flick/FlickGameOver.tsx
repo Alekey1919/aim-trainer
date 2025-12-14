@@ -1,16 +1,14 @@
+import useRedirections from "../../hooks/useRedirections";
 import type { IFlickRoundResult } from "../../types/TargetTypes";
 
 interface FlickGameOverProps {
   results: IFlickRoundResult[];
   onPlayAgain: () => void;
-  onGoBack: () => void;
 }
 
-const FlickGameOver = ({
-  results,
-  onPlayAgain,
-  onGoBack,
-}: FlickGameOverProps) => {
+const FlickGameOver = ({ results, onPlayAgain }: FlickGameOverProps) => {
+  const { goToGames } = useRedirections();
+
   const hits = results.filter((r) => r.hit).length;
   const misses = results.filter((r) => !r.hit).length;
   const hitResults = results.filter((r) => r.hit);
@@ -75,7 +73,7 @@ const FlickGameOver = ({
           Play Again
         </button>
         <button
-          onClick={onGoBack}
+          onClick={goToGames}
           className="px-8 py-3 border-2 border-mint text-mint font-bold text-lg rounded-lg hover:bg-mint/10 transition-colors"
         >
           Back to Menu

@@ -1,8 +1,9 @@
+import useRedirections from "../../hooks/useRedirections";
+
 interface GameOverProps {
   score: number;
   timeElapsed: number;
   onPlayAgain: () => void;
-  onGoBack: () => void;
 }
 
 const formatTime = (seconds: number): string => {
@@ -11,12 +12,9 @@ const formatTime = (seconds: number): string => {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
 
-const GameOver = ({
-  score,
-  timeElapsed,
-  onPlayAgain,
-  onGoBack,
-}: GameOverProps) => {
+const GameOver = ({ score, timeElapsed, onPlayAgain }: GameOverProps) => {
+  const { goToGames } = useRedirections();
+
   return (
     <div className="flex flex-col items-center justify-center h-full gap-8">
       <h2 className="text-mint text-4xl font-bold">Game Over</h2>
@@ -40,7 +38,7 @@ const GameOver = ({
           Play Again
         </button>
         <button
-          onClick={onGoBack}
+          onClick={goToGames}
           className="px-8 py-3 border-2 border-mint text-mint font-bold text-lg rounded-lg hover:bg-mint/10 transition-colors"
         >
           Back to Menu

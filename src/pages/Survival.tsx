@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import GameArea from "../components/shared/GameArea";
-import GameHUD from "../components/survival/GameHUD";
-import GameOver from "../components/survival/GameOver";
+import GameLayout from "../components/shared/GameLayout";
+import GameOver from "../components/survival/SurvivalGameOver";
+import GameHUD from "../components/survival/SurvivalHUD";
 import SurvivalSettings from "../components/survival/SurvivalSettings";
 import Target from "../components/survival/SurvivalTarget";
-import RoutesEnum from "../enums/RoutesEnum";
 import {
   GamePhase,
   type ISurvivalSettings,
@@ -16,8 +15,6 @@ import {
 const MAX_LIVES = 3;
 
 const Survival = () => {
-  const navigate = useNavigate();
-
   // Game settings
   const [settings, setSettings] = useState<ISurvivalSettings>({
     targetSpeed: 3,
@@ -105,11 +102,6 @@ const Survival = () => {
     startGame();
   }, [startGame]);
 
-  // Handle go back to menu
-  const handleGoBack = useCallback(() => {
-    navigate(RoutesEnum.GameModes);
-  }, [navigate]);
-
   // Set up spawn interval when playing
   useEffect(() => {
     if (phase === GamePhase.Playing) {
@@ -152,26 +144,8 @@ const Survival = () => {
     }
   }, [phase]);
 
-  // Render phase label
-  const getPhaseLabel = () => {
-    switch (phase) {
-      case GamePhase.Settings:
-        return "Game starting";
-      case GamePhase.Playing:
-        return "Gameplay";
-      case GamePhase.GameOver:
-        return "Game Over";
-    }
-  };
-
   return (
-    <div className="layout-padding min-h-screen flex flex-col">
-      {/* Phase indicator */}
-      <div className="text-cream/50 text-sm mb-4">{getPhaseLabel()}</div>
-
-      {/* Title */}
-      <h1 className="text-mint text-center mb-10">Click the targets</h1>
-
+    <GameLayout title="Click all targets">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
         <GameArea className="flex items-center justify-center">
@@ -212,11 +186,10 @@ const Survival = () => {
             score={score}
             timeElapsed={timeElapsed}
             onPlayAgain={handlePlayAgain}
-            onGoBack={handleGoBack}
           />
         </GameArea>
       )}
-    </div>
+    </GameLayout>
   );
 };
 

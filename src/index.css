@@ -45,3 +45,7 @@ h2 {
     opacity: 0;
   }
 }
+
+button {
+  @apply cursor-pointer;
+}

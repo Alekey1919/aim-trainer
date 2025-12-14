@@ -1,11 +1,10 @@
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import FlickGameOver from "../components/flick/FlickGameOver";
 import FlickHUD from "../components/flick/FlickHUD";
 import FlickSettings from "../components/flick/FlickSettings";
 import FlickTarget from "../components/flick/FlickTarget";
 import GameArea from "../components/shared/GameArea";
-import RoutesEnum from "../enums/RoutesEnum";
+import GameLayout from "../components/shared/GameLayout";
 import {
   FLICK_DISTANCES,
   GamePhase,
@@ -16,8 +15,6 @@ import {
 } from "../types/TargetTypes";
 
 const Flick = () => {
-  const navigate = useNavigate();
-
   // Game settings
   const [settings, setSettings] = useState<IFlickSettings>({
     targetSize: "medium",
@@ -184,11 +181,6 @@ const Flick = () => {
     startGame();
   }, [startGame]);
 
-  // Handle go back to menu
-  const handleGoBack = useCallback(() => {
-    navigate(RoutesEnum.GameModes);
-  }, [navigate]);
-
   // Calculate stats for HUD
   const hitResults = results.filter((r) => r.hit);
   const lastReactionTime =
@@ -203,26 +195,8 @@ const Flick = () => {
   const hits = hitResults.length;
   const misses = results.filter((r) => !r.hit).length;
 
-  // Render phase label
-  const getPhaseLabel = () => {
-    switch (phase) {
-      case GamePhase.Settings:
-        return "Game starting";
-      case GamePhase.Playing:
-        return "Gameplay";
-      case GamePhase.GameOver:
-        return "Results";
-    }
-  };
-
   return (
-    <div className="layout-padding min-h-screen flex flex-col">
-      {/* Phase indicator */}
-      <div className="text-cream/50 text-sm mb-4">{getPhaseLabel()}</div>
-
-      {/* Title */}
-      <h1 className="text-mint text-center mb-10">Flick between targets</h1>
-
+    <GameLayout title="Flick between targets">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
         <GameArea className="flex items-center justify-center">
@@ -267,14 +241,10 @@ const Flick = () => {
       {/* Game Over Phase */}
       {phase === GamePhase.GameOver && (
         <GameArea className="flex items-center justify-center">
-          <FlickGameOver
-            results={results}
-            onPlayAgain={handlePlayAgain}
-            onGoBack={handleGoBack}
-          />
+          <FlickGameOver results={results} onPlayAgain={handlePlayAgain} />
         </GameArea>
       )}
-    </div>
+    </GameLayout>
   );
 };
 

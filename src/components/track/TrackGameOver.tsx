@@ -1,9 +1,10 @@
+import useRedirections from "../../hooks/useRedirections";
+
 interface TrackGameOverProps {
   score: number;
   trackingPercent: number;
   gameTime: number;
   onPlayAgain: () => void;
-  onGoBack: () => void;
 }
 
 const TrackGameOver = ({
@@ -11,8 +12,9 @@ const TrackGameOver = ({
   trackingPercent,
   gameTime,
   onPlayAgain,
-  onGoBack,
 }: TrackGameOverProps) => {
+  const { goToGames } = useRedirections();
+
   return (
     <div className="flex flex-col items-center justify-center h-full gap-8">
       <h2 className="text-mint text-4xl font-bold">Results</h2>
@@ -40,7 +42,7 @@ const TrackGameOver = ({
           Play Again
         </button>
         <button
-          onClick={onGoBack}
+          onClick={goToGames}
           className="px-8 py-3 border-2 border-mint text-mint font-bold text-lg rounded-lg hover:bg-mint/10 transition-colors"
         >
           Back to Menu

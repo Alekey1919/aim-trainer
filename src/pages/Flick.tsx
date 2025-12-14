@@ -28,7 +28,9 @@ const Flick = () => {
   // Game state
   const [phase, setPhase] = useState<GamePhase>(GamePhase.Settings);
   const [currentRound, setCurrentRound] = useState(1);
-  const [targets, setTargets] = useState<[IFlickTargetData, IFlickTargetData] | null>(null);
+  const [targets, setTargets] = useState<
+    [IFlickTargetData, IFlickTargetData] | null
+  >(null);
   const [activeTargetIndex, setActiveTargetIndex] = useState<0 | 1>(0);
   const [firstClickTime, setFirstClickTime] = useState<number | null>(null);
   const [results, setResults] = useState<IFlickRoundResult[]>([]);
@@ -137,7 +139,14 @@ const Flick = () => {
         }
       }
     },
-    [targets, activeTargetIndex, firstClickTime, currentRound, settings.rounds, generateTargetPair]
+    [
+      targets,
+      activeTargetIndex,
+      firstClickTime,
+      currentRound,
+      settings.rounds,
+      generateTargetPair,
+    ]
   );
 
   // Handle missed click (clicked on game area but not on target)
@@ -148,7 +157,7 @@ const Flick = () => {
 
       // Check if clicked on a target (if so, let target handler deal with it)
       const target = e.target as HTMLElement;
-      if (target.closest('[data-target]')) return;
+      if (target.closest("[data-target]")) return;
 
       const reactionTime = Date.now() - firstClickTime;
       const result: IFlickRoundResult = {
@@ -182,10 +191,14 @@ const Flick = () => {
 
   // Calculate stats for HUD
   const hitResults = results.filter((r) => r.hit);
-  const lastReactionTime = hitResults.length > 0 ? hitResults[hitResults.length - 1].reactionTime : null;
+  const lastReactionTime =
+    hitResults.length > 0
+      ? hitResults[hitResults.length - 1].reactionTime
+      : null;
   const averageTime =
     hitResults.length > 0
-      ? hitResults.reduce((acc, r) => acc + r.reactionTime, 0) / hitResults.length
+      ? hitResults.reduce((acc, r) => acc + r.reactionTime, 0) /
+        hitResults.length
       : null;
   const hits = hitResults.length;
   const misses = results.filter((r) => !r.hit).length;

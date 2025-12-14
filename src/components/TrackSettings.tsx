@@ -1,35 +1,36 @@
 import { twMerge } from "tailwind-merge";
 import type {
-  FlickDistance,
-  IFlickSettings,
+  ITrackSettings,
   TargetSize,
+  TrackGameTime,
+  TrackSpeed,
 } from "../types/TargetTypes";
 
-interface FlickSettingsProps {
-  settings: IFlickSettings;
-  onSettingsChange: (settings: IFlickSettings) => void;
+interface TrackSettingsProps {
+  settings: ITrackSettings;
+  onSettingsChange: (settings: ITrackSettings) => void;
   onPlay: () => void;
 }
 
 const sizeOptions: TargetSize[] = ["small", "medium", "large"];
-const distanceOptions: FlickDistance[] = ["close", "medium", "far"];
-const roundOptions = [5, 10, 15, 20];
+const speedOptions: TrackSpeed[] = ["slow", "medium", "fast"];
+const timeOptions: TrackGameTime[] = [15, 30, 45, 60];
 
-const FlickSettings = ({
+const TrackSettings = ({
   settings,
   onSettingsChange,
   onPlay,
-}: FlickSettingsProps) => {
+}: TrackSettingsProps) => {
   const handleSizeChange = (size: TargetSize) => {
     onSettingsChange({ ...settings, targetSize: size });
   };
 
-  const handleDistanceChange = (distance: FlickDistance) => {
-    onSettingsChange({ ...settings, distance });
+  const handleSpeedChange = (speed: TrackSpeed) => {
+    onSettingsChange({ ...settings, speed });
   };
 
-  const handleRoundsChange = (rounds: number) => {
-    onSettingsChange({ ...settings, rounds });
+  const handleTimeChange = (gameTime: TrackGameTime) => {
+    onSettingsChange({ ...settings, gameTime });
   };
 
   return (
@@ -54,39 +55,39 @@ const FlickSettings = ({
           </div>
         </div>
 
-        {/* Distance */}
+        {/* Speed */}
         <div className="flex items-center gap-6">
-          <span className="text-cream/80 w-40">Distance:</span>
+          <span className="text-cream/80 w-40">Speed:</span>
           <div className="flex gap-3">
-            {distanceOptions.map((distance) => (
+            {speedOptions.map((speed) => (
               <button
-                key={distance}
-                onClick={() => handleDistanceChange(distance)}
+                key={speed}
+                onClick={() => handleSpeedChange(speed)}
                 className={twMerge(
                   "text-cream/60 hover:text-cream transition-colors capitalize underline-offset-4",
-                  settings.distance === distance && "text-cream underline"
+                  settings.speed === speed && "text-cream underline"
                 )}
               >
-                {distance}
+                {speed}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Rounds */}
+        {/* Game Time */}
         <div className="flex items-center gap-6">
-          <span className="text-cream/80 w-40">Rounds:</span>
+          <span className="text-cream/80 w-40">Game time:</span>
           <div className="flex gap-3">
-            {roundOptions.map((rounds) => (
+            {timeOptions.map((time) => (
               <button
-                key={rounds}
-                onClick={() => handleRoundsChange(rounds)}
+                key={time}
+                onClick={() => handleTimeChange(time)}
                 className={twMerge(
                   "text-cream/60 hover:text-cream transition-colors underline-offset-4",
-                  settings.rounds === rounds && "text-cream underline"
+                  settings.gameTime === time && "text-cream underline"
                 )}
               >
-                {rounds}
+                {time}s
               </button>
             ))}
           </div>
@@ -104,4 +105,4 @@ const FlickSettings = ({
   );
 };
 
-export default FlickSettings;
+export default TrackSettings;

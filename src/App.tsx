@@ -3,6 +3,7 @@ import Flick from "./pages/Flick";
 import GameModes from "./pages/GameModes";
 import Homepage from "./pages/Homepage";
 import Survival from "./pages/Survival";
+import Track from "./pages/Track";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -12,6 +13,7 @@ const AnimatedRoutes = () => {
       <Route path="/game-modes" element={<GameModes />} />
       <Route path="/survival" element={<Survival />} />
       <Route path="/flick" element={<Flick />} />
+      <Route path="/track" element={<Track />} />
     </Routes>
   );
 };

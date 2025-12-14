@@ -14,21 +14,27 @@ const FlickGameOver = ({
   const hits = results.filter((r) => r.hit).length;
   const misses = results.filter((r) => !r.hit).length;
   const hitResults = results.filter((r) => r.hit);
-  
+
   const averageTime =
     hitResults.length > 0
       ? Math.round(
-          hitResults.reduce((acc, r) => acc + r.reactionTime, 0) / hitResults.length
+          hitResults.reduce((acc, r) => acc + r.reactionTime, 0) /
+            hitResults.length
         )
       : 0;
 
   const bestTime =
-    hitResults.length > 0 ? Math.min(...hitResults.map((r) => r.reactionTime)) : 0;
+    hitResults.length > 0
+      ? Math.min(...hitResults.map((r) => r.reactionTime))
+      : 0;
 
   const worstTime =
-    hitResults.length > 0 ? Math.max(...hitResults.map((r) => r.reactionTime)) : 0;
+    hitResults.length > 0
+      ? Math.max(...hitResults.map((r) => r.reactionTime))
+      : 0;
 
-  const accuracy = results.length > 0 ? Math.round((hits / results.length) * 100) : 0;
+  const accuracy =
+    results.length > 0 ? Math.round((hits / results.length) * 100) : 0;
 
   return (
     <div className="flex flex-col items-center justify-center h-full gap-8">

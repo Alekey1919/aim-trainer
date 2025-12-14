@@ -78,3 +78,22 @@ export interface IFlickTargetData {
   size: number;
   isActive: boolean; // the one to click
 }
+
+// Track game speed options
+export type TrackSpeed = "slow" | "medium" | "fast";
+
+export const TRACK_SPEEDS: Record<TrackSpeed, number> = {
+  slow: 1,
+  medium: 2,
+  fast: 3,
+};
+
+// Track game time options (in seconds)
+export type TrackGameTime = 15 | 30 | 45 | 60;
+
+// Track game settings
+export interface ITrackSettings {
+  targetSize: TargetSize;
+  speed: TrackSpeed;
+  gameTime: TrackGameTime;
+}

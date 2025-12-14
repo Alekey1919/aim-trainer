@@ -4,7 +4,7 @@ import GameArea from "../components/GameArea";
 import GameHUD from "../components/GameHUD";
 import GameOver from "../components/GameOver";
 import SurvivalSettings from "../components/SurvivalSettings";
-import Target from "../components/Target";
+import Target from "../components/SurvivalTarget";
 import RoutesEnum from "../enums/RoutesEnum";
 import {
   GamePhase,

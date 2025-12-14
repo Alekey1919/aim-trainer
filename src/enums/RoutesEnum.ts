@@ -4,6 +4,7 @@ const RoutesEnum = {
   Survival: "/survival",
   Flick: "/flick",
   Track: "/track",
+  Reflex: "/reflex",
 } as const;
 
 export default RoutesEnum;

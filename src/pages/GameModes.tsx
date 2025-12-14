@@ -6,7 +6,7 @@ const gameModes = [
   { name: "Flick", img: "", url: RoutesEnum.Flick },
   { name: "Tracking", img: "", url: RoutesEnum.Track },
   { name: "Click speed", img: "", url: undefined },
-  { name: "Reaction time", img: "", url: undefined },
+  { name: "Reflex", img: "", url: RoutesEnum.Reflex },
 ];
 
 const GameModes = () => {

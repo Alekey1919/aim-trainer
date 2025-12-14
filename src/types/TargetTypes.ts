@@ -97,3 +97,14 @@ export interface ITrackSettings {
   speed: TrackSpeed;
   gameTime: TrackGameTime;
 }
+
+// Reflex game settings
+export interface IReflexSettings {
+  targetSize: TargetSize;
+}
+
+// Reflex round result
+export interface IReflexRoundResult {
+  round: number;
+  reactionTime: number; // ms to click target
+}

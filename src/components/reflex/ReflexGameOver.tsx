@@ -1,4 +1,4 @@
-import type { IReflexRoundResult } from "../types/TargetTypes";
+import type { IReflexRoundResult } from "../../types/TargetTypes";
 
 interface ReflexGameOverProps {
   results: IReflexRoundResult[];

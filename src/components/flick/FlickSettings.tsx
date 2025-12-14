@@ -3,7 +3,7 @@ import type {
   FlickDistance,
   IFlickSettings,
   TargetSize,
-} from "../types/TargetTypes";
+} from "../../types/TargetTypes";
 
 interface FlickSettingsProps {
   settings: IFlickSettings;

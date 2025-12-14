@@ -4,7 +4,7 @@ import type {
   TargetSize,
   TrackGameTime,
   TrackSpeed,
-} from "../types/TargetTypes";
+} from "../../types/TargetTypes";
 
 interface TrackSettingsProps {
   settings: ITrackSettings;

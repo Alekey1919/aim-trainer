@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import type { ISurvivalSettings, TargetSize } from "../types/TargetTypes";
+import type { ISurvivalSettings, TargetSize } from "../../types/TargetTypes";
 
 interface SurvivalSettingsProps {
   settings: ISurvivalSettings;

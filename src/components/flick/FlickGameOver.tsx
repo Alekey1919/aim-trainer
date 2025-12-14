@@ -1,4 +1,4 @@
-import type { IFlickRoundResult } from "../types/TargetTypes";
+import type { IFlickRoundResult } from "../../types/TargetTypes";
 
 interface FlickGameOverProps {
   results: IFlickRoundResult[];

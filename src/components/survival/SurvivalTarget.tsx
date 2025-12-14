@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { ITargetData } from "../types/TargetTypes";
+import type { ITargetData } from "../../types/TargetTypes";
 
 interface SurvivalTargetProps {
   targetData: ITargetData;

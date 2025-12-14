@@ -5,8 +5,8 @@ const gameModes = [
   { name: "Survival", img: "", url: RoutesEnum.Survival },
   { name: "Flick", img: "", url: RoutesEnum.Flick },
   { name: "Tracking", img: "", url: RoutesEnum.Track },
-  { name: "Click speed", img: "", url: undefined },
   { name: "Reflex", img: "", url: RoutesEnum.Reflex },
+  { name: "Reaction Time", img: "", url: RoutesEnum.ReactionTime },
 ];
 
 const GameModes = () => {

@@ -138,3 +138,27 @@ export interface IReflexRoundResult {
   round: number;
   reactionTime: number; // ms to click target
 }
+
+// Reaction Time game phase (more specific states)
+export const ReactionTimePhase = {
+  Settings: "settings",
+  Waiting: "waiting",
+  Ready: "ready",
+  TooEarly: "tooEarly",
+  Result: "result",
+  GameOver: "gameOver",
+} as const;
+
+export type ReactionTimePhase =
+  (typeof ReactionTimePhase)[keyof typeof ReactionTimePhase];
+
+// Reaction Time settings
+export interface IReactionTimeSettings {
+  rounds: number;
+}
+
+// Reaction Time round result
+export interface IReactionTimeResult {
+  round: number;
+  reactionTime: number; // ms to click after green
+}

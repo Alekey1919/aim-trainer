@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Flick from "./pages/Flick";
 import GameModes from "./pages/GameModes";
 import Homepage from "./pages/Homepage";
+import ReactionTime from "./pages/ReactionTime";
 import Reflex from "./pages/Reflex";
 import Survival from "./pages/Survival";
 import Track from "./pages/Track";
@@ -16,6 +17,7 @@ const AnimatedRoutes = () => {
       <Route path="/flick" element={<Flick />} />
       <Route path="/track" element={<Track />} />
       <Route path="/reflex" element={<Reflex />} />
+      <Route path="/reaction-time" element={<ReactionTime />} />
     </Routes>
   );
 };

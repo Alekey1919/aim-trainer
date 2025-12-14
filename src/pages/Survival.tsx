@@ -6,6 +6,7 @@ import GameHUD from "../components/survival/SurvivalHUD";
 import SurvivalSettings from "../components/survival/SurvivalSettings";
 import Target from "../components/survival/SurvivalTarget";
 import {
+  DIFFICULTY_CONFIG,
   GamePhase,
   type ISurvivalSettings,
   type ITargetData,
@@ -17,8 +18,7 @@ const MAX_LIVES = 3;
 const Survival = () => {
   // Game settings
   const [settings, setSettings] = useState<ISurvivalSettings>({
-    targetSpeed: 3,
-    spawnInterval: 3,
+    difficulty: "medium",
     targetSize: "medium",
   });
 
@@ -31,8 +31,11 @@ const Survival = () => {
 
   // Refs for intervals
   const targetIdCounter = useRef(0);
-  const spawnIntervalRef = useRef<number | null>(null);
+  const spawnTimeoutRef = useRef<number | null>(null);
   const timerIntervalRef = useRef<number | null>(null);
+
+  // Get current difficulty config
+  const difficultyConfig = DIFFICULTY_CONFIG[settings.difficulty];
 
   // Generate random position for a target
   const generateRandomPosition = useCallback(() => {
@@ -50,11 +53,15 @@ const Survival = () => {
       x,
       y,
       size: TARGET_SIZES[settings.targetSize],
-      duration: settings.targetSpeed * 1000,
+      duration: difficultyConfig.targetSpeed * 1000,
       createdAt: Date.now(),
     };
     setTargets((prev) => [...prev, newTarget]);
-  }, [generateRandomPosition, settings.targetSize, settings.targetSpeed]);
+  }, [
+    generateRandomPosition,
+    settings.targetSize,
+    difficultyConfig.targetSpeed,
+  ]);
 
   // Handle target click
   const handleTargetClick = useCallback((targetId: number) => {
@@ -91,31 +98,69 @@ const Survival = () => {
         x,
         y,
         size: TARGET_SIZES[settings.targetSize],
-        duration: settings.targetSpeed * 1000,
+        duration: difficultyConfig.targetSpeed * 1000,
         createdAt: Date.now(),
       },
     ]);
-  }, [generateRandomPosition, settings.targetSize, settings.targetSpeed]);
+  }, [
+    generateRandomPosition,
+    settings.targetSize,
+    difficultyConfig.targetSpeed,
+  ]);
 
   // Handle play again
   const handlePlayAgain = useCallback(() => {
     startGame();
   }, [startGame]);
 
-  // Set up spawn interval when playing
+  // Use refs to avoid stale closures in the spawn loop
+  const spawnTargetRef = useRef(spawnTarget);
+  const difficultyConfigRef = useRef(difficultyConfig);
+  const timeElapsedRef = useRef(timeElapsed);
+
+  // Keep refs updated
+  useEffect(() => {
+    spawnTargetRef.current = spawnTarget;
+  }, [spawnTarget]);
+
+  useEffect(() => {
+    difficultyConfigRef.current = difficultyConfig;
+  }, [difficultyConfig]);
+
+  useEffect(() => {
+    timeElapsedRef.current = timeElapsed;
+  }, [timeElapsed]);
+
+  // Set up spawn timeout when playing (uses dynamic interval)
   useEffect(() => {
     if (phase === GamePhase.Playing) {
-      spawnIntervalRef.current = window.setInterval(() => {
-        spawnTarget();
-      }, settings.spawnInterval * 1000);
+      const scheduleNextSpawn = () => {
+        const {
+          initialSpawnInterval,
+          minSpawnInterval,
+          spawnIntervalDecreaseRate,
+        } = difficultyConfigRef.current;
+        const decrease = timeElapsedRef.current * spawnIntervalDecreaseRate;
+        const currentInterval = Math.max(
+          minSpawnInterval,
+          initialSpawnInterval - decrease
+        );
+
+        spawnTimeoutRef.current = window.setTimeout(() => {
+          spawnTargetRef.current();
+          scheduleNextSpawn();
+        }, currentInterval * 1000);
+      };
+
+      scheduleNextSpawn();
 
       return () => {
-        if (spawnIntervalRef.current) {
-          clearInterval(spawnIntervalRef.current);
+        if (spawnTimeoutRef.current) {
+          clearTimeout(spawnTimeoutRef.current);
         }
       };
     }
-  }, [phase, settings.spawnInterval, spawnTarget]);
+  }, [phase]);
 
   // Set up timer when playing
   useEffect(() => {
@@ -135,8 +180,8 @@ const Survival = () => {
   // Clean up intervals on game over
   useEffect(() => {
     if (phase === GamePhase.GameOver) {
-      if (spawnIntervalRef.current) {
-        clearInterval(spawnIntervalRef.current);
+      if (spawnTimeoutRef.current) {
+        clearTimeout(spawnTimeoutRef.current);
       }
       if (timerIntervalRef.current) {
         clearInterval(timerIntervalRef.current);

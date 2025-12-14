@@ -1,5 +1,9 @@
 import { twMerge } from "tailwind-merge";
-import type { ISurvivalSettings, TargetSize } from "../../types/TargetTypes";
+import type {
+  Difficulty,
+  ISurvivalSettings,
+  TargetSize,
+} from "../../types/TargetTypes";
 
 interface SurvivalSettingsProps {
   settings: ISurvivalSettings;
@@ -7,8 +11,7 @@ interface SurvivalSettingsProps {
   onPlay: () => void;
 }
 
-const speedOptions = [1, 2, 3, 4, 5];
-const intervalOptions = [1, 2, 3, 4, 5];
+const difficultyOptions: Difficulty[] = ["easy", "medium", "hard"];
 const sizeOptions: TargetSize[] = ["small", "medium", "large"];
 
 const SurvivalSettings = ({
@@ -16,12 +19,8 @@ const SurvivalSettings = ({
   onSettingsChange,
   onPlay,
 }: SurvivalSettingsProps) => {
-  const handleSpeedChange = (speed: number) => {
-    onSettingsChange({ ...settings, targetSpeed: speed });
-  };
-
-  const handleIntervalChange = (interval: number) => {
-    onSettingsChange({ ...settings, spawnInterval: interval });
+  const handleDifficultyChange = (difficulty: Difficulty) => {
+    onSettingsChange({ ...settings, difficulty });
   };
 
   const handleSizeChange = (size: TargetSize) => {
@@ -31,39 +30,20 @@ const SurvivalSettings = ({
   return (
     <div className="flex flex-col items-center justify-center h-full gap-8">
       <div className="flex flex-col gap-6 text-lg">
-        {/* Target Speed */}
+        {/* Difficulty */}
         <div className="flex items-center gap-6">
-          <span className="text-cream/80 w-40">Target speed:</span>
+          <span className="text-cream/80 w-40">Difficulty:</span>
           <div className="flex gap-3">
-            {speedOptions.map((speed) => (
+            {difficultyOptions.map((difficulty) => (
               <button
-                key={speed}
-                onClick={() => handleSpeedChange(speed)}
+                key={difficulty}
+                onClick={() => handleDifficultyChange(difficulty)}
                 className={twMerge(
-                  "text-cream/60 hover:text-cream transition-colors underline-offset-4",
-                  settings.targetSpeed === speed && "text-cream underline"
+                  "text-cream/60 hover:text-cream transition-colors capitalize underline-offset-4",
+                  settings.difficulty === difficulty && "text-cream underline"
                 )}
               >
-                {speed} second{speed !== 1 ? "s" : ""}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Spawn Interval */}
-        <div className="flex items-center gap-6">
-          <span className="text-cream/80 w-40">Spawn interval:</span>
-          <div className="flex gap-3">
-            {intervalOptions.map((interval) => (
-              <button
-                key={interval}
-                onClick={() => handleIntervalChange(interval)}
-                className={twMerge(
-                  "text-cream/60 hover:text-cream transition-colors underline-offset-4",
-                  settings.spawnInterval === interval && "text-cream underline"
-                )}
-              >
-                {interval} second{interval !== 1 ? "s" : ""}
+                {difficulty}
               </button>
             ))}
           </div>

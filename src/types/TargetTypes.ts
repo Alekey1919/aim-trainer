@@ -22,10 +22,40 @@ export const TARGET_SIZES: Record<TargetSize, number> = {
   large: 70,
 };
 
+// Difficulty options
+export type Difficulty = "easy" | "medium" | "hard";
+
+export interface IDifficultyConfig {
+  targetSpeed: number; // Duration in seconds for target lifecycle (stays constant)
+  initialSpawnInterval: number; // Initial seconds between spawns
+  minSpawnInterval: number; // Minimum spawn interval (fastest it can get)
+  spawnIntervalDecreaseRate: number; // How much to decrease spawn interval per second survived
+}
+
+export const DIFFICULTY_CONFIG: Record<Difficulty, IDifficultyConfig> = {
+  easy: {
+    targetSpeed: 3,
+    initialSpawnInterval: 2,
+    minSpawnInterval: 1,
+    spawnIntervalDecreaseRate: 0.02,
+  },
+  medium: {
+    targetSpeed: 2.5,
+    initialSpawnInterval: 1.5,
+    minSpawnInterval: 0.5,
+    spawnIntervalDecreaseRate: 0.025,
+  },
+  hard: {
+    targetSpeed: 2,
+    initialSpawnInterval: 1,
+    minSpawnInterval: 0.2,
+    spawnIntervalDecreaseRate: 0.03,
+  },
+};
+
 // Survival game settings
 export interface ISurvivalSettings {
-  targetSpeed: number; // Duration in seconds for target lifecycle
-  spawnInterval: number; // Seconds between spawns
+  difficulty: Difficulty;
   targetSize: TargetSize;
 }
 

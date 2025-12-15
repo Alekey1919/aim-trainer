@@ -113,9 +113,9 @@ export interface IFlickTargetData {
 export type TrackSpeed = "slow" | "medium" | "fast";
 
 export const TRACK_SPEEDS: Record<TrackSpeed, number> = {
-  slow: 1,
-  medium: 2,
-  fast: 3,
+  slow: 0.5,
+  medium: 1,
+  fast: 1.3,
 };
 
 // Track game time options (in seconds)

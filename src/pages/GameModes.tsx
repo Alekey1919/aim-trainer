@@ -17,7 +17,7 @@ const gameModes = [
 const GameModes = () => {
   return (
     <div className="layout-padding">
-      <h2 className="text-mint text-center tracking-wide">Game Modes</h2>
+      <h1 className="text-mint text-center tracking-wide">Game Modes</h1>
 
       <div className="w-full grid grid-cols-4 gap-x-5 gap-y-10 mt-20">
         {gameModes.map((mode) => (

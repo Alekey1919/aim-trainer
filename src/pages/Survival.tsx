@@ -27,6 +27,7 @@ const Survival = () => {
   // Game state
   const [phase, setPhase] = useState<GamePhase>(GamePhase.Settings);
   const [score, setScore] = useState(0);
+  const [misses, setMisses] = useState(0);
   const [lives, setLives] = useState(MAX_LIVES);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [targets, setTargets] = useState<ITargetData[]>([]);
@@ -66,24 +67,30 @@ const Survival = () => {
   ]);
 
   // Handle target click
-  const handleTargetClick = useCallback((targetId: number) => {
-    playHit();
-    setTargets((prev) => prev.filter((t) => t.id !== targetId));
-    setScore((prev) => prev + 1);
-  }, [playHit]);
+  const handleTargetClick = useCallback(
+    (targetId: number) => {
+      playHit();
+      setTargets((prev) => prev.filter((t) => t.id !== targetId));
+      setScore((prev) => prev + 1);
+    },
+    [playHit]
+  );
 
   // Handle target expiration (missed)
-  const handleTargetExpire = useCallback((targetId: number) => {
-    playLifeLost();
-    setTargets((prev) => prev.filter((t) => t.id !== targetId));
-    setLives((prev) => {
-      const newLives = prev - 1;
-      if (newLives <= 0) {
-        setPhase(GamePhase.GameOver);
-      }
-      return newLives;
-    });
-  }, [playLifeLost]);
+  const handleTargetExpire = useCallback(
+    (targetId: number) => {
+      playLifeLost();
+      setTargets((prev) => prev.filter((t) => t.id !== targetId));
+      setLives((prev) => {
+        const newLives = prev - 1;
+        if (newLives <= 0) {
+          setPhase(GamePhase.GameOver);
+        }
+        return newLives;
+      });
+    },
+    [playLifeLost]
+  );
 
   // Handle area click (missed click - not on a target)
   const handleAreaClick = useCallback(
@@ -92,8 +99,9 @@ const Survival = () => {
       const target = e.target as HTMLElement;
       if (target.closest("[data-target]")) return;
 
-      // Play miss sound for clicking empty area
+      // Play miss sound and increment miss counter for clicking empty area
       playMiss();
+      setMisses((prev) => prev + 1);
     },
     [playMiss]
   );
@@ -102,6 +110,7 @@ const Survival = () => {
   const startGame = useCallback(() => {
     setPhase(GamePhase.Playing);
     setScore(0);
+    setMisses(0);
     setLives(MAX_LIVES);
     setTimeElapsed(0);
     setTargets([]);
@@ -246,6 +255,7 @@ const Survival = () => {
         <GameArea className="flex items-center justify-center">
           <GameOver
             score={score}
+            misses={misses}
             timeElapsed={timeElapsed}
             onPlayAgain={handlePlayAgain}
           />

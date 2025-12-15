@@ -181,7 +181,14 @@ const Flick = () => {
         setTargets(generateTargetPair());
       }
     },
-    [phase, firstClickTime, currentRound, settings.rounds, generateTargetPair, playMiss]
+    [
+      phase,
+      firstClickTime,
+      currentRound,
+      settings.rounds,
+      generateTargetPair,
+      playMiss,
+    ]
   );
 
   // Handle play again

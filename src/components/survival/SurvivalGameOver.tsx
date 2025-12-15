@@ -2,6 +2,7 @@ import useRedirections from "@/hooks/useRedirections";
 
 interface GameOverProps {
   score: number;
+  misses: number;
   timeElapsed: number;
   onPlayAgain: () => void;
 }
@@ -12,8 +13,18 @@ const formatTime = (seconds: number): string => {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
 
-const GameOver = ({ score, timeElapsed, onPlayAgain }: GameOverProps) => {
+const GameOver = ({
+  score,
+  misses,
+  timeElapsed,
+  onPlayAgain,
+}: GameOverProps) => {
   const { goToGames } = useRedirections();
+
+  // Calculate accuracy
+  const totalClicks = score + misses;
+  const accuracy =
+    totalClicks > 0 ? Math.round((score / totalClicks) * 100) : 0;
 
   return (
     <div className="flex flex-col items-center justify-center h-full gap-8">
@@ -27,6 +38,10 @@ const GameOver = ({ score, timeElapsed, onPlayAgain }: GameOverProps) => {
         <div className="flex gap-4">
           <span className="text-cream/60">Time survived:</span>
           <span className="font-semibold">{formatTime(timeElapsed)}</span>
+        </div>
+        <div className="flex gap-4">
+          <span className="text-cream/60">Accuracy:</span>
+          <span className="font-semibold">{accuracy}%</span>
         </div>
       </div>
 

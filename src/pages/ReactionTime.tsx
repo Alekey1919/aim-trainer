@@ -21,7 +21,7 @@ const ReactionTime = () => {
 
   // Game state
   const [phase, setPhase] = useState<ReactionTimePhase>(
-    ReactionTimePhase.Ready
+    ReactionTimePhase.Settings
   );
   const [currentRound, setCurrentRound] = useState(1);
   const [results, setResults] = useState<IReactionTimeResult[]>([]);

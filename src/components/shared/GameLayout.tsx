@@ -37,10 +37,7 @@ const GameLayout = ({
       </div>
       {children}
 
-      <Settings
-        isOpen={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
-      />
+      <Settings isOpen={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </div>
   );
 };

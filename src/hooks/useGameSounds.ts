@@ -81,7 +81,14 @@ const useGameSounds = () => {
     audio.play().catch(() => {});
   }, [getLifeLostAudio]);
 
-  return { playHit, playMiss, playLifeLost, previewHit, previewMiss, previewLifeLost };
+  return {
+    playHit,
+    playMiss,
+    playLifeLost,
+    previewHit,
+    previewMiss,
+    previewLifeLost,
+  };
 };
 
 export default useGameSounds;

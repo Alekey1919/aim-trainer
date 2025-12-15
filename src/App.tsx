@@ -28,7 +28,7 @@ const App = () => {
   return (
     <SoundProvider>
       <CrosshairProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/aim-trainer">
           <AnimatedRoutes />
         </BrowserRouter>
       </CrosshairProvider>

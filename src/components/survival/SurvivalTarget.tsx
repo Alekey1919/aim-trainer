@@ -30,7 +30,7 @@ const SurvivalTarget = ({
   return (
     <div
       data-target
-      className="absolute rounded-full bg-mint cursor-pointer hover:opacity-90 transition-opacity"
+      className="absolute rounded-full bg-mint hover:opacity-90 transition-opacity"
       style={{
         width: `${size}px`,
         height: `${size}px`,

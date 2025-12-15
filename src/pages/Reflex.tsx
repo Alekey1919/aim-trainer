@@ -146,7 +146,10 @@ const Reflex = () => {
     <GameLayout title="Test your reflexes">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <ReflexSettings
             settings={settings}
             onSettingsChange={setSettings}
@@ -185,7 +188,10 @@ const Reflex = () => {
 
       {/* Game Over Phase */}
       {phase === GamePhase.GameOver && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <ReflexGameOver results={results} onPlayAgain={handlePlayAgain} />
         </GameArea>
       )}

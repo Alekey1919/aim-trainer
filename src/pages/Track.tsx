@@ -202,7 +202,10 @@ const Track = () => {
     <GameLayout title="Track the target">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <TrackSettings
             settings={settings}
             onSettingsChange={setSettings}
@@ -220,7 +223,7 @@ const Track = () => {
             trackingPercent={trackingPercent}
           />
           <div ref={gameAreaRef} onMouseMove={handleMouseMove}>
-            <GameArea>
+            <GameArea useCrosshair={false}>
               <TrackTarget
                 x={targetPosition.x}
                 y={targetPosition.y}
@@ -234,7 +237,10 @@ const Track = () => {
 
       {/* Game Over Phase */}
       {phase === GamePhase.GameOver && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <TrackGameOver
             score={score}
             trackingPercent={trackingPercent}

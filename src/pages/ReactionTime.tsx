@@ -177,7 +177,10 @@ const ReactionTime = () => {
     <GameLayout title="Reaction Time">
       {/* Settings Phase */}
       {phase === ReactionTimePhase.Settings && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <ReactionTimeSettings
             settings={settings}
             onSettingsChange={setSettings}
@@ -200,6 +203,7 @@ const ReactionTime = () => {
           )}
           <GameArea
             className={`flex items-center justify-center min-h-100 transition-colors duration-100 ${getBackgroundClass()}`}
+            useCrosshair={false}
             onClick={
               phase === ReactionTimePhase.Waiting ||
               phase === ReactionTimePhase.Ready
@@ -214,7 +218,10 @@ const ReactionTime = () => {
 
       {/* Game Over Phase */}
       {phase === ReactionTimePhase.GameOver && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <ReactionTimeGameOver
             results={results}
             onPlayAgain={handlePlayAgain}

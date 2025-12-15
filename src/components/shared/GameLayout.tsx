@@ -1,5 +1,8 @@
 import Cross from "@/assets/images/back.svg";
+import SettingsImg from "@/assets/images/settings.svg";
 import useRedirections from "@/hooks/useRedirections";
+import { useState } from "react";
+import CrosshairSettings from "./CrosshairSettings";
 
 const GameLayout = ({
   title,
@@ -9,6 +12,7 @@ const GameLayout = ({
   children: React.ReactNode;
 }) => {
   const { goToGames } = useRedirections();
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
     <div className="layout-padding min-h-screen flex flex-col">
@@ -21,8 +25,22 @@ const GameLayout = ({
           />
         </button>
         <h1 className="text-mint text-center">{title}</h1>
+        <div className="flex justify-end">
+          <button onClick={() => setSettingsOpen(true)} title="Settings">
+            <img
+              src={SettingsImg}
+              alt="Settings"
+              className="w-14 hover:scale-105 transition-transform"
+            />
+          </button>
+        </div>
       </div>
       {children}
+
+      <CrosshairSettings
+        isOpen={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+      />
     </div>
   );
 };

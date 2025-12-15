@@ -13,7 +13,7 @@ const FlickTarget = ({ x, y, size, isActive, onClick }: FlickTargetProps) => {
     <div
       data-target
       className={twMerge(
-        "absolute rounded-full cursor-pointer transition-all duration-150",
+        "absolute rounded-full transition-all duration-150",
         isActive ? "bg-mint scale-100" : "bg-cream/40 scale-90"
       )}
       style={{

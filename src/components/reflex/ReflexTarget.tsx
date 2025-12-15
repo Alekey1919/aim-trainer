@@ -9,7 +9,7 @@ const ReflexTarget = ({ x, y, size, onClick }: ReflexTargetProps) => {
   return (
     <div
       data-target
-      className="absolute rounded-full bg-mint cursor-pointer hover:bg-mint/90 transition-colors"
+      className="absolute rounded-full bg-mint hover:bg-mint/90 transition-colors"
       style={{
         width: `${size}px`,
         height: `${size}px`,

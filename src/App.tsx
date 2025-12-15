@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { CrosshairProvider } from "./contexts/CrosshairContext";
 import Flick from "./pages/Flick";
 import GameModes from "./pages/GameModes";
 import Homepage from "./pages/Homepage";
@@ -24,9 +25,11 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <AnimatedRoutes />
-    </BrowserRouter>
+    <CrosshairProvider>
+      <BrowserRouter>
+        <AnimatedRoutes />
+      </BrowserRouter>
+    </CrosshairProvider>
   );
 };
 

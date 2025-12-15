@@ -219,7 +219,10 @@ const Survival = () => {
     <GameLayout title="Click all targets">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <SurvivalSettings
             settings={settings}
             onSettingsChange={setSettings}
@@ -252,7 +255,10 @@ const Survival = () => {
 
       {/* Game Over Phase */}
       {phase === GamePhase.GameOver && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <GameOver
             score={score}
             misses={misses}

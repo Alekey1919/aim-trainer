@@ -214,7 +214,10 @@ const Flick = () => {
     <GameLayout title="Flick between targets">
       {/* Settings Phase */}
       {phase === GamePhase.Settings && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <FlickSettings
             settings={settings}
             onSettingsChange={setSettings}
@@ -255,7 +258,10 @@ const Flick = () => {
 
       {/* Game Over Phase */}
       {phase === GamePhase.GameOver && (
-        <GameArea className="flex items-center justify-center">
+        <GameArea
+          className="flex items-center justify-center"
+          useCrosshair={false}
+        >
           <FlickGameOver results={results} onPlayAgain={handlePlayAgain} />
         </GameArea>
       )}

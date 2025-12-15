@@ -1,5 +1,5 @@
+import type { IReactionTimeSettings } from "@/types/TargetTypes";
 import { twMerge } from "tailwind-merge";
-import type { IReactionTimeSettings } from "../../types/TargetTypes";
 
 interface ReactionTimeSettingsProps {
   settings: IReactionTimeSettings;

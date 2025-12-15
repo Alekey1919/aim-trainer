@@ -1,5 +1,5 @@
-import useRedirections from "../../hooks/useRedirections";
-import type { IFlickRoundResult } from "../../types/TargetTypes";
+import useRedirections from "@/hooks/useRedirections";
+import type { IFlickRoundResult } from "@/types/TargetTypes";
 
 interface FlickGameOverProps {
   results: IFlickRoundResult[];

@@ -1,9 +1,9 @@
-import { twMerge } from "tailwind-merge";
 import type {
   FlickDistance,
   IFlickSettings,
   TargetSize,
-} from "../../types/TargetTypes";
+} from "@/types/TargetTypes";
+import { twMerge } from "tailwind-merge";
 
 interface FlickSettingsProps {
   settings: IFlickSettings;

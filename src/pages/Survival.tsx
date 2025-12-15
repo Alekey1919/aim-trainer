@@ -1,10 +1,10 @@
+import GameArea from "@/components/shared/GameArea";
+import GameLayout from "@/components/shared/GameLayout";
+import GameOver from "@/components/survival/SurvivalGameOver";
+import GameHUD from "@/components/survival/SurvivalHUD";
+import SurvivalSettings from "@/components/survival/SurvivalSettings";
+import Target from "@/components/survival/SurvivalTarget";
 import { useCallback, useEffect, useRef, useState } from "react";
-import GameArea from "../components/shared/GameArea";
-import GameLayout from "../components/shared/GameLayout";
-import GameOver from "../components/survival/SurvivalGameOver";
-import GameHUD from "../components/survival/SurvivalHUD";
-import SurvivalSettings from "../components/survival/SurvivalSettings";
-import Target from "../components/survival/SurvivalTarget";
 import {
   DIFFICULTY_CONFIG,
   GamePhase,

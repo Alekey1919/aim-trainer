@@ -1,5 +1,5 @@
+import RoutesEnum from "@/enums/RoutesEnum";
 import { Link } from "react-router-dom";
-import RoutesEnum from "../enums/RoutesEnum";
 
 const Homepage = () => {
   return (

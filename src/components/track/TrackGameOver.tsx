@@ -1,4 +1,4 @@
-import useRedirections from "../../hooks/useRedirections";
+import useRedirections from "@/hooks/useRedirections";
 
 interface TrackGameOverProps {
   score: number;

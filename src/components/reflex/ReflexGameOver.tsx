@@ -1,5 +1,5 @@
-import useRedirections from "../../hooks/useRedirections";
-import type { IReflexRoundResult } from "../../types/TargetTypes";
+import useRedirections from "@/hooks/useRedirections";
+import type { IReflexRoundResult } from "@/types/TargetTypes";
 
 interface ReflexGameOverProps {
   results: IReflexRoundResult[];

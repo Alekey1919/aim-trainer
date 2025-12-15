@@ -1,5 +1,5 @@
-import Cross from "../../assets/back.svg";
-import useRedirections from "../../hooks/useRedirections";
+import Cross from "@/assets/images/back.svg";
+import useRedirections from "@/hooks/useRedirections";
 
 const GameLayout = ({
   title,

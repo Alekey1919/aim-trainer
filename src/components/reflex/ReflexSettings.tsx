@@ -1,5 +1,5 @@
+import type { IReflexSettings, TargetSize } from "@/types/TargetTypes";
 import { twMerge } from "tailwind-merge";
-import type { IReflexSettings, TargetSize } from "../../types/TargetTypes";
 
 interface ReflexSettingsProps {
   settings: IReflexSettings;

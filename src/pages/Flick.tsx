@@ -1,10 +1,10 @@
+import FlickGameOver from "@/components/flick/FlickGameOver";
+import FlickHUD from "@/components/flick/FlickHUD";
+import FlickSettings from "@/components/flick/FlickSettings";
+import FlickTarget from "@/components/flick/FlickTarget";
+import GameArea from "@/components/shared/GameArea";
+import GameLayout from "@/components/shared/GameLayout";
 import { useCallback, useState } from "react";
-import FlickGameOver from "../components/flick/FlickGameOver";
-import FlickHUD from "../components/flick/FlickHUD";
-import FlickSettings from "../components/flick/FlickSettings";
-import FlickTarget from "../components/flick/FlickTarget";
-import GameArea from "../components/shared/GameArea";
-import GameLayout from "../components/shared/GameLayout";
 import {
   FLICK_DISTANCES,
   GamePhase,

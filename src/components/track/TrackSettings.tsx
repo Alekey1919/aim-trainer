@@ -1,10 +1,10 @@
-import { twMerge } from "tailwind-merge";
 import type {
   ITrackSettings,
   TargetSize,
   TrackGameTime,
   TrackSpeed,
-} from "../../types/TargetTypes";
+} from "@/types/TargetTypes";
+import { twMerge } from "tailwind-merge";
 
 interface TrackSettingsProps {
   settings: ITrackSettings;

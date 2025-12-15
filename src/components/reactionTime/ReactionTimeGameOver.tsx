@@ -1,5 +1,5 @@
-import useRedirections from "../../hooks/useRedirections";
-import type { IReactionTimeResult } from "../../types/TargetTypes";
+import useRedirections from "@/hooks/useRedirections";
+import type { IReactionTimeResult } from "@/types/TargetTypes";
 
 interface ReactionTimeGameOverProps {
   results: IReactionTimeResult[];

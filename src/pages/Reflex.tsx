@@ -1,10 +1,10 @@
+import ReflexGameOver from "@/components/reflex/ReflexGameOver";
+import ReflexHUD from "@/components/reflex/ReflexHUD";
+import ReflexSettings from "@/components/reflex/ReflexSettings";
+import ReflexTarget from "@/components/reflex/ReflexTarget";
+import GameArea from "@/components/shared/GameArea";
+import GameLayout from "@/components/shared/GameLayout";
 import { useCallback, useEffect, useRef, useState } from "react";
-import ReflexGameOver from "../components/reflex/ReflexGameOver";
-import ReflexHUD from "../components/reflex/ReflexHUD";
-import ReflexSettings from "../components/reflex/ReflexSettings";
-import ReflexTarget from "../components/reflex/ReflexTarget";
-import GameArea from "../components/shared/GameArea";
-import GameLayout from "../components/shared/GameLayout";
 import {
   GamePhase,
   TARGET_SIZES,

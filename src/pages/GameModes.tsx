@@ -1,10 +1,10 @@
-import FlickImg from "../assets/flick.webp";
-import ReactionTimeImg from "../assets/reaction-time.webp";
-import ReflexImg from "../assets/reflex.webp";
-import SurvivalImg from "../assets/survival.webp";
-import TrackingImg from "../assets/tracking.webp";
-import GameThumbnail from "../components/shared/GameThumbnail";
-import RoutesEnum from "../enums/RoutesEnum";
+import FlickImg from "@/assets/images/flick.webp";
+import ReactionTimeImg from "@/assets/images/reaction-time.webp";
+import ReflexImg from "@/assets/images/reflex.webp";
+import SurvivalImg from "@/assets/images/survival.webp";
+import TrackingImg from "@/assets/images/tracking.webp";
+import GameThumbnail from "@/components/shared/GameThumbnail";
+import RoutesEnum from "@/enums/RoutesEnum";
 
 const gameModes = [
   { name: "Survival", img: SurvivalImg, url: RoutesEnum.Survival },

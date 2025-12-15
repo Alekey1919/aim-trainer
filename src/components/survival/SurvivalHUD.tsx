@@ -1,5 +1,5 @@
-import EmptyHeart from "../../assets/empty-heart.svg";
-import Heart from "../../assets/heart.svg";
+import EmptyHeart from "@/assets/images/empty-heart.svg";
+import Heart from "@/assets/images/heart.svg";
 
 interface GameHUDProps {
   score: number;

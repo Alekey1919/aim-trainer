@@ -1,10 +1,10 @@
+import GameArea from "@/components/shared/GameArea";
+import GameLayout from "@/components/shared/GameLayout";
+import TrackGameOver from "@/components/track/TrackGameOver";
+import TrackHUD from "@/components/track/TrackHUD";
+import TrackSettings from "@/components/track/TrackSettings";
+import TrackTarget from "@/components/track/TrackTarget";
 import { useCallback, useEffect, useRef, useState } from "react";
-import GameArea from "../components/shared/GameArea";
-import GameLayout from "../components/shared/GameLayout";
-import TrackGameOver from "../components/track/TrackGameOver";
-import TrackHUD from "../components/track/TrackHUD";
-import TrackSettings from "../components/track/TrackSettings";
-import TrackTarget from "../components/track/TrackTarget";
 import {
   GamePhase,
   TARGET_SIZES,

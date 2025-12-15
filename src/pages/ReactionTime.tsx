@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import ReactionTimeGameOver from "../components/reactionTime/ReactionTimeGameOver";
-import ReactionTimeSettings from "../components/reactionTime/ReactionTimeSettings";
-import GameArea from "../components/shared/GameArea";
-import GameLayout from "../components/shared/GameLayout";
+import ReactionTimeGameOver from "@/components/reactionTime/ReactionTimeGameOver";
+import ReactionTimeSettings from "@/components/reactionTime/ReactionTimeSettings";
+import GameArea from "@/components/shared/GameArea";
+import GameLayout from "@/components/shared/GameLayout";
 import {
   ReactionTimePhase,
   type IReactionTimeResult,
   type IReactionTimeSettings,
-} from "../types/TargetTypes";
+} from "@/types/TargetTypes";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 // Min and max delay before screen turns green (in ms)
 const MIN_DELAY = 1500;

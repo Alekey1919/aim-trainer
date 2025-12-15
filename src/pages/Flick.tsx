@@ -4,6 +4,7 @@ import FlickSettings from "@/components/flick/FlickSettings";
 import FlickTarget from "@/components/flick/FlickTarget";
 import GameArea from "@/components/shared/GameArea";
 import GameLayout from "@/components/shared/GameLayout";
+import useGameSounds from "@/hooks/useGameSounds";
 import { useCallback, useState } from "react";
 import {
   FLICK_DISTANCES,
@@ -15,6 +16,7 @@ import {
 } from "../types/TargetTypes";
 
 const Flick = () => {
+  const { playHit, playMiss } = useGameSounds();
   // Game settings
   const [settings, setSettings] = useState<IFlickSettings>({
     targetSize: "medium",
@@ -90,6 +92,7 @@ const Flick = () => {
 
       if (activeTargetIndex === 0 && targetIndex === 0) {
         // First click - start timing
+        playHit();
         setFirstClickTime(Date.now());
         setActiveTargetIndex(1);
         setTargets([
@@ -98,6 +101,7 @@ const Flick = () => {
         ]);
       } else if (activeTargetIndex === 1 && targetIndex === 1) {
         // Second click - record result
+        playHit();
         const reactionTime = firstClickTime ? Date.now() - firstClickTime : 0;
         const result: IFlickRoundResult = {
           round: currentRound,
@@ -117,6 +121,7 @@ const Flick = () => {
         }
       } else if (!isActiveTarget) {
         // Clicked wrong target - record miss
+        playMiss();
         const reactionTime = firstClickTime ? Date.now() - firstClickTime : 0;
         const result: IFlickRoundResult = {
           round: currentRound,
@@ -143,6 +148,8 @@ const Flick = () => {
       currentRound,
       settings.rounds,
       generateTargetPair,
+      playHit,
+      playMiss,
     ]
   );
 
@@ -156,6 +163,7 @@ const Flick = () => {
       const target = e.target as HTMLElement;
       if (target.closest("[data-target]")) return;
 
+      playMiss();
       const reactionTime = Date.now() - firstClickTime;
       const result: IFlickRoundResult = {
         round: currentRound,
@@ -173,7 +181,7 @@ const Flick = () => {
         setTargets(generateTargetPair());
       }
     },
-    [phase, firstClickTime, currentRound, settings.rounds, generateTargetPair]
+    [phase, firstClickTime, currentRound, settings.rounds, generateTargetPair, playMiss]
   );
 
   // Handle play again

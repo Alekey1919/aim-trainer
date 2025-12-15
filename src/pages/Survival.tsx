@@ -4,6 +4,7 @@ import GameOver from "@/components/survival/SurvivalGameOver";
 import GameHUD from "@/components/survival/SurvivalHUD";
 import SurvivalSettings from "@/components/survival/SurvivalSettings";
 import Target from "@/components/survival/SurvivalTarget";
+import useGameSounds from "@/hooks/useGameSounds";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   DIFFICULTY_CONFIG,
@@ -16,6 +17,7 @@ import {
 const MAX_LIVES = 3;
 
 const Survival = () => {
+  const { playHit, playMiss, playLifeLost } = useGameSounds();
   // Game settings
   const [settings, setSettings] = useState<ISurvivalSettings>({
     difficulty: "medium",
@@ -65,12 +67,14 @@ const Survival = () => {
 
   // Handle target click
   const handleTargetClick = useCallback((targetId: number) => {
+    playHit();
     setTargets((prev) => prev.filter((t) => t.id !== targetId));
     setScore((prev) => prev + 1);
-  }, []);
+  }, [playHit]);
 
   // Handle target expiration (missed)
   const handleTargetExpire = useCallback((targetId: number) => {
+    playLifeLost();
     setTargets((prev) => prev.filter((t) => t.id !== targetId));
     setLives((prev) => {
       const newLives = prev - 1;
@@ -79,7 +83,20 @@ const Survival = () => {
       }
       return newLives;
     });
-  }, []);
+  }, [playLifeLost]);
+
+  // Handle area click (missed click - not on a target)
+  const handleAreaClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      // Check if clicked on a target
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-target]")) return;
+
+      // Play miss sound for clicking empty area
+      playMiss();
+    },
+    [playMiss]
+  );
 
   // Start the game
   const startGame = useCallback(() => {
@@ -211,7 +228,7 @@ const Survival = () => {
             lives={lives}
             maxLives={MAX_LIVES}
           />
-          <GameArea>
+          <GameArea onClick={handleAreaClick}>
             {targets.map((target) => (
               <Target
                 key={target.id}

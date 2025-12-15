@@ -4,6 +4,7 @@ import ReflexSettings from "@/components/reflex/ReflexSettings";
 import ReflexTarget from "@/components/reflex/ReflexTarget";
 import GameArea from "@/components/shared/GameArea";
 import GameLayout from "@/components/shared/GameLayout";
+import useGameSounds from "@/hooks/useGameSounds";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   GamePhase,
@@ -17,6 +18,7 @@ const MIN_SPAWN_DELAY = 1000;
 const MAX_SPAWN_DELAY = 3000;
 
 const Reflex = () => {
+  const { playHit, playMiss } = useGameSounds();
   // Game settings
   const [settings, setSettings] = useState<IReflexSettings>({
     targetSize: "medium",
@@ -63,6 +65,7 @@ const Reflex = () => {
   const handleTargetClick = useCallback(() => {
     if (!targetVisible) return;
 
+    playHit();
     const reactionTime = Date.now() - targetSpawnTimeRef.current;
     const result: IReflexRoundResult = {
       round: currentRound + 1,
@@ -75,7 +78,7 @@ const Reflex = () => {
 
     // Schedule next target
     scheduleNextTarget();
-  }, [targetVisible, currentRound, scheduleNextTarget]);
+  }, [targetVisible, currentRound, scheduleNextTarget, playHit]);
 
   // Handle area click (miss - game over if target was visible)
   const handleAreaClick = useCallback(
@@ -86,6 +89,7 @@ const Reflex = () => {
 
       // If target was visible, this is a miss - game over
       if (targetVisible) {
+        playMiss();
         setPhase(GamePhase.GameOver);
         setTargetVisible(false);
         if (spawnTimeoutRef.current) {
@@ -93,7 +97,7 @@ const Reflex = () => {
         }
       }
     },
-    [targetVisible]
+    [targetVisible, playMiss]
   );
 
   // Start the game

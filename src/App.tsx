@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { CrosshairProvider } from "./contexts/CrosshairContext";
+import { SoundProvider } from "./contexts/SoundContext";
 import Flick from "./pages/Flick";
 import GameModes from "./pages/GameModes";
 import Homepage from "./pages/Homepage";
@@ -25,11 +26,13 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   return (
-    <CrosshairProvider>
-      <BrowserRouter>
-        <AnimatedRoutes />
-      </BrowserRouter>
-    </CrosshairProvider>
+    <SoundProvider>
+      <CrosshairProvider>
+        <BrowserRouter>
+          <AnimatedRoutes />
+        </BrowserRouter>
+      </CrosshairProvider>
+    </SoundProvider>
   );
 };
 

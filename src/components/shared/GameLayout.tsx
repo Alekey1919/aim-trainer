@@ -2,7 +2,7 @@ import Cross from "@/assets/images/back.svg";
 import SettingsImg from "@/assets/images/settings.svg";
 import useRedirections from "@/hooks/useRedirections";
 import { useState } from "react";
-import CrosshairSettings from "./CrosshairSettings";
+import Settings from "./settings/Settings";
 
 const GameLayout = ({
   title,
@@ -37,7 +37,7 @@ const GameLayout = ({
       </div>
       {children}
 
-      <CrosshairSettings
+      <Settings
         isOpen={settingsOpen}
         onClose={() => setSettingsOpen(false)}
       />

@@ -7,7 +7,7 @@ interface ReactionTimeSettingsProps {
   onPlay: () => void;
 }
 
-const roundOptions = [3, 5, 10];
+const roundOptions = [1, 3, 5, 10];
 
 const ReactionTimeSettings = ({
   settings,

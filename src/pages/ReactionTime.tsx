@@ -1,4 +1,5 @@
 import ReactionTimeGameOver from "@/components/reactionTime/ReactionTimeGameOver";
+import ReactionTimeScoreboard from "@/components/reactionTime/ReactionTimeScoreboard";
 import ReactionTimeSettings from "@/components/reactionTime/ReactionTimeSettings";
 import GameArea from "@/components/shared/GameArea";
 import GameLayout from "@/components/shared/GameLayout";
@@ -7,6 +8,10 @@ import {
   type IReactionTimeResult,
   type IReactionTimeSettings,
 } from "@/types/TargetTypes";
+import {
+  saveReactionTimeScore,
+  type RoundsOption,
+} from "@/utils/reactionTimeScores";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 // Min and max delay before screen turns green (in ms)
@@ -100,6 +105,30 @@ const ReactionTime = () => {
   const handlePlayAgain = useCallback(() => {
     startGame();
   }, [startGame]);
+
+  // Scoreboard refresh counter
+  const [scoreboardRefresh, setScoreboardRefresh] = useState(0);
+
+  // Save score when game ends
+  const hasSavedScore = useRef(false);
+
+  useEffect(() => {
+    if (
+      phase === ReactionTimePhase.GameOver &&
+      results.length > 0 &&
+      !hasSavedScore.current
+    ) {
+      const averageTime = Math.round(
+        results.reduce((acc, r) => acc + r.reactionTime, 0) / results.length
+      );
+      saveReactionTimeScore(averageTime, settings.rounds as RoundsOption);
+      hasSavedScore.current = true;
+      setScoreboardRefresh((prev) => prev + 1);
+    } else if (phase === ReactionTimePhase.Waiting) {
+      hasSavedScore.current = false;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
 
   // Clean up timeout on unmount
   useEffect(() => {
@@ -228,6 +257,9 @@ const ReactionTime = () => {
           />
         </GameArea>
       )}
+
+      {/* Scoreboard */}
+      <ReactionTimeScoreboard refreshTrigger={scoreboardRefresh} />
     </GameLayout>
   );
 };

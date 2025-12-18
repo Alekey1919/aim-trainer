@@ -96,11 +96,13 @@ const Survival = () => {
 
   // Save score when game ends
   const hasSavedScore = useRef(false);
+  const [scoreboardRefresh, setScoreboardRefresh] = useState(0);
 
   useEffect(() => {
     if (phase === GamePhase.GameOver && score > 0 && !hasSavedScore.current) {
       saveSurvivalScore(score, timeElapsed, settings.difficulty);
       hasSavedScore.current = true;
+      setScoreboardRefresh((prev) => prev + 1);
     } else if (phase === GamePhase.Playing) {
       hasSavedScore.current = false;
     }
@@ -284,7 +286,7 @@ const Survival = () => {
       )}
 
       {/* Scoreboard */}
-      <SurvivalScoreboard refreshTrigger={phase} />
+      <SurvivalScoreboard refreshTrigger={scoreboardRefresh} />
     </GameLayout>
   );
 };

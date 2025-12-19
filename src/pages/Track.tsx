@@ -2,8 +2,10 @@ import GameArea from "@/components/shared/GameArea";
 import GameLayout from "@/components/shared/GameLayout";
 import TrackGameOver from "@/components/track/TrackGameOver";
 import TrackHUD from "@/components/track/TrackHUD";
+import TrackScoreboard from "@/components/track/TrackScoreboard";
 import TrackSettings from "@/components/track/TrackSettings";
 import TrackTarget from "@/components/track/TrackTarget";
+import { saveTrackScore, type TrackSpeedOption } from "@/utils/trackScores";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   GamePhase,
@@ -131,6 +133,28 @@ const Track = () => {
     startGame();
   }, [startGame]);
 
+  // Scoreboard refresh counter
+  const [scoreboardRefresh, setScoreboardRefresh] = useState(0);
+
+  // Save score when game ends
+  const hasSavedScore = useRef(false);
+
+  useEffect(() => {
+    if (
+      phase === GamePhase.GameOver &&
+      totalTicks > 0 &&
+      !hasSavedScore.current
+    ) {
+      const accuracy = (hoveringTicks / totalTicks) * 100;
+      saveTrackScore(accuracy, settings.speed as TrackSpeedOption);
+      hasSavedScore.current = true;
+      setScoreboardRefresh((prev) => prev + 1);
+    } else if (phase === GamePhase.Playing) {
+      hasSavedScore.current = false;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
   // Set up game loop when playing
   useEffect(() => {
     if (phase === GamePhase.Playing) {
@@ -249,6 +273,9 @@ const Track = () => {
           />
         </GameArea>
       )}
+
+      {/* Scoreboard */}
+      <TrackScoreboard refreshTrigger={scoreboardRefresh} />
     </GameLayout>
   );
 };

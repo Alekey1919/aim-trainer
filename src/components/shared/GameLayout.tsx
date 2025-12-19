@@ -16,7 +16,7 @@ const GameLayout = ({
 
   return (
     <div className="layout-padding min-h-screen flex flex-col">
-      <div className="items-center justify-between grid grid-cols-3">
+      <div className="items-center justify-between grid grid-cols-3 pb-24">
         <button onClick={goToGames}>
           <img
             src={Cross}

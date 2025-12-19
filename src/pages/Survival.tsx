@@ -2,9 +2,11 @@ import GameArea from "@/components/shared/GameArea";
 import GameLayout from "@/components/shared/GameLayout";
 import GameOver from "@/components/survival/SurvivalGameOver";
 import GameHUD from "@/components/survival/SurvivalHUD";
+import SurvivalScoreboard from "@/components/survival/SurvivalScoreboard";
 import SurvivalSettings from "@/components/survival/SurvivalSettings";
 import Target from "@/components/survival/SurvivalTarget";
 import useGameSounds from "@/hooks/useGameSounds";
+import { saveSurvivalScore } from "@/utils/survivalScores";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   DIFFICULTY_CONFIG,
@@ -91,6 +93,21 @@ const Survival = () => {
     },
     [playLifeLost]
   );
+
+  // Save score when game ends
+  const hasSavedScore = useRef(false);
+  const [scoreboardRefresh, setScoreboardRefresh] = useState(0);
+
+  useEffect(() => {
+    if (phase === GamePhase.GameOver && score > 0 && !hasSavedScore.current) {
+      saveSurvivalScore(score, timeElapsed, settings.difficulty);
+      hasSavedScore.current = true;
+      setScoreboardRefresh((prev) => prev + 1);
+    } else if (phase === GamePhase.Playing) {
+      hasSavedScore.current = false;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
 
   // Handle area click (missed click - not on a target)
   const handleAreaClick = useCallback(
@@ -267,6 +284,9 @@ const Survival = () => {
           />
         </GameArea>
       )}
+
+      {/* Scoreboard */}
+      <SurvivalScoreboard refreshTrigger={scoreboardRefresh} />
     </GameLayout>
   );
 };
